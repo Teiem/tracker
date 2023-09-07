@@ -15,16 +15,37 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSContactsUsageDescription": "Allow this app to access your contacts for suggestions"
+      },
+      "bundleIdentifier": "com.teiem.tracker"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "permissions": [
+        "android.permission.READ_CONTACTS",
+        "android.permission.WRITE_CONTACTS"
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      [
+        "expo-contacts",
+        {
+          "contactsPermission": "Allow this app to access your contacts for suggestions"
+        }
+      ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "e5736e28-fdec-4d65-88df-6155678c0073"
+      }
     }
   }
 }

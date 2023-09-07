@@ -1,20 +1,36 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+import HomeScreen from './screens/HomeScreen';
+import AddGameRecordScreen, { Player } from './screens/AddGameRecordScreen';
+import StatisticsScreen from './screens/StatisticsScreen';
+import { AutocompleteDropdownContextProvider } from 'react-native-autocomplete-dropdown';
+import HistoryScreen from './screens/HistoryScreen';
+import GameDetailsScreen from './screens/GameDetailsScreen';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+export type RootStackParamList = {
+    "Home": any;
+    "Add Game Record": undefined;
+    "Statistics": undefined;
+    "History": undefined;
+    "GameDetails": { players: Player[], id: string };
+};
+
+const Stack = createStackNavigator<RootStackParamList>();
+
+const App = () => {
+    return (
+        <AutocompleteDropdownContextProvider>
+            <NavigationContainer>
+                <Stack.Navigator>
+                    <Stack.Screen name="Home" component={HomeScreen} />
+                    <Stack.Screen name="Add Game Record" component={AddGameRecordScreen} />
+                    <Stack.Screen name="Statistics" component={StatisticsScreen} />
+                    <Stack.Screen name="History" component={HistoryScreen} />
+                    <Stack.Screen name="GameDetails" component={GameDetailsScreen} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </AutocompleteDropdownContextProvider>
+    );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
